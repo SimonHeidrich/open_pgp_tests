@@ -1,12 +1,12 @@
 # OpenPGP Tests
 
-This repo serves to illustrate a bug, either in [SequoiaPGP](https://crates.io/crates/sequoia-sq), [rpgp](https://crates.io/crates/pgp), or in the scripts I created here.
+This repo serves to illustrate a bug, either in [SequoiaPGP](https://crates.io/crates/sequoia-sq), [rpgp](https://crates.io/crates/pgp), or in the scripts I created here. For lack of a better place, it is currently tracked in [openpgp-interoperability-test-suite#166](https://gitlab.com/sequoia-pgp/openpgp-interoperability-test-suite/-/issues/166).
 
 The error concerns password-protected secret keys with the RFC 9580 / Version 6 profile.
 
 I use SequoiaPGP inside a docker container to generate test certificates. When I generated a password-protected RFC9580 certificate, I could neither unlock it on my host (which uses SequoiaPGP) nor in the code of [BOMnipotent](https://www.bomnipotent.de), which uses rpgp. I *could* however unlock it with SequoiaPGP *inside* the docker container that created it.
 
-During my experiments I uninstalled and reinstalled SequoiaPGP (both via apt and via cargo). Since then I *can* use the keys from host (with versions 1.3.0, 1.3.1 and 1-3-1-2+b1), which confuses me greatly. It still does not work with rpgp now.
+During my experiments I uninstalled and reinstalled SequoiaPGP (both via apt and via cargo). Since then I *can* use the keys from host (with versions 1.3.0, 1.3.1 and 1-3-1-2+b1), which confuses me greatly. It still does not work with rpgp though.
 
 This repo provides Dockerfiles that (at the time of writing) run version 1.3.1-2+b1 (the debian trixie apt version) and 1.3.1 (the cargo install). The results proved to be the same, but I wanted to make sure.
 
