@@ -10,6 +10,8 @@ During my experiments I uninstalled and reinstalled SequoiaPGP (both via apt and
 
 This repo provides Dockerfiles that (at the time of writing) run version 1.3.1-2+b1 (the debian trixie apt version) and 1.3.1 (the cargo install). The results proved to be the same, but I wanted to make sure.
 
+They V6 keys from the [OpenPGP interoperability test suite](https://sequoia-pgp.gitlab.io/openpgp-interoperability-test-suite/results.html#Encrypted_keys) that are supposed to work *do* work. So the usage of rpgp in this repo here is probably not completely wrong.
+
 ## How to break things
 
 The easies way to see the problem is the script "just_the_problem.sh". It prompts you for a password, generates an encrypted key file, stores it in the output folder. It then uses rsop (which is based on rpgp) to try to sign an arbitrary message, prompting you for the password again. In all my experiments, this never worked.
