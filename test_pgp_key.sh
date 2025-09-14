@@ -1,27 +1,37 @@
 #!/bin/bash
 
+set -e
+
 chmod +x ./shared.sh
 source ./shared.sh "$@"
 
 INPUT=$(basename "$INPUT")
 
+if [[ "$IMAGE" == "host" ]]; then
+    DIR=output
+else
+    DIR=/home
+fi
+
 sign_something_command() {
     local cmd=("sq" "sign")
-    cmd+=("/home/.gitkeep")
-    cmd+=("--signer-file=/home/$INPUT")
+    cmd+=("$DIR/.gitkeep")
+    cmd+=("--signer-file=$DIR/$INPUT")
     cmd+=(--cleartext)
     echo "${cmd[@]}"
 }
 
-bash_command="$(sign_something_command)"
+bash_command="$(sign_something_command) > /dev/null 2>&1 && echo Signature created successfully."
 
-docker run --rm -it \
-    --volume "$(pwd)/output:/home" \
-    $IMAGE \
+echo ""
+echo "Running command in image $IMAGE:"
+echo "$bash_command"
+
+if [[ "$IMAGE" == "host" ]]; then
     bash -c "$bash_command"
-
-if [[ $? -eq 0 ]]; then
-    echo "Signing succeeded for key $INPUT with image $IMAGE."
 else
-    echo "Signing failed for key $INPUT with image $IMAGE."
+    docker run --rm -it \
+        --volume "$(pwd)/output:/home" \
+        $IMAGE \
+        bash -c "$bash_command"
 fi

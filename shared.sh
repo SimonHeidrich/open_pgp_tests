@@ -36,14 +36,18 @@ if [[ "$IMAGE" == "sq_via_apt" ]] || [[ "$IMAGE" == "apt" ]]; then
     IMAGE="sq_via_apt"
 elif [[ "$IMAGE" == "sq_via_cargo" ]] || [[ "$IMAGE" == "cargo" ]]; then
     IMAGE="sq_via_cargo"
+elif [[ "$IMAGE" == "host" ]]; then
+    IMAGE="host"
 else
     echo "Unsupported image: $IMAGE"
     exit 1
 fi
 
-if ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
-    echo "Docker image $IMAGE does not exist."
-    echo "Building it..."
-    chmod +x ./build_containers.sh
-    ./build_containers.sh --image "$IMAGE"
+if [[ "$IMAGE" != "host" ]]; then
+    if ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
+        echo "Docker image $IMAGE does not exist."
+        echo "Building it..."
+        chmod +x ./build_containers.sh
+        ./build_containers.sh --image "$IMAGE"
+    fi
 fi
