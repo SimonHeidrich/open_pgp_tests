@@ -40,6 +40,7 @@ elif [[ "$IMAGE" == "host" ]]; then
     IMAGE="host"
 else
     echo "Unsupported image: $IMAGE"
+    echo "Supported images are: apt, cargo, host (only during signing tests)"
     exit 1
 fi
 

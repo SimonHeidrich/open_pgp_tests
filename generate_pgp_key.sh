@@ -27,11 +27,6 @@ if [[ -z "$OUTPUT" ]]; then
     else
         PARTS+=("cargo")
     fi
-    if [[ -n "$PASSPHRASE" ]]; then
-        PARTS+=("scripted_passphrase")
-    else
-        PARTS+=("prompted_passphrase")
-    fi
     OUTPUT=$(IFS=_ ; echo "${PARTS[*]}")
 fi
 

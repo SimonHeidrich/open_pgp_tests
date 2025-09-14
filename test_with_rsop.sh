@@ -13,7 +13,7 @@ echo "Enter the password:"
 read -rs PASSWORD
 echo -n "$PASSWORD" > /tmp/.password
 
-echo "hello world" | rsop sign $INPUT --with-key-password /tmp/.password > /dev/null 2>&1 && echo "Signature successfully created."
+echo "hello world" | rsop sign $INPUT --with-key-password /tmp/.password > /dev/null && echo "Signature successfully created."
 if [[ $? -ne 0 ]]; then
     echo ""
     echo "==="
