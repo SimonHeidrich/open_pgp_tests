@@ -21,11 +21,10 @@ sign_something_command() {
     echo "${cmd[@]}"
 }
 
-bash_command="$(sign_something_command) > /dev/null 2>&1 && echo Signature created successfully."
+bash_command="$(sign_something_command) > /dev/null 2>&1 && echo Signature successfully created."
 
 echo ""
-echo "Running command in image $IMAGE:"
-echo "$bash_command"
+echo "Testing $INPUT in $IMAGE with sq."
 
 if [[ "$IMAGE" == "host" ]]; then
     bash -c "$bash_command"
