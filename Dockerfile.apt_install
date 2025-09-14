@@ -1,0 +1,6 @@
+FROM debian:trixie
+
+RUN apt-get update
+RUN apt-get install -y sq
+
+CMD ["tail", "-f", "/dev/null"]

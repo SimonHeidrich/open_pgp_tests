@@ -1,0 +1,7 @@
+FROM rust:trixie
+
+RUN apt-get update
+RUN apt-get install -y clang nettle-dev pkg-config libssl-dev capnproto libsqlite3-dev
+RUN cargo install --locked sequoia-sq
+
+CMD ["tail", "-f", "/dev/null"]
