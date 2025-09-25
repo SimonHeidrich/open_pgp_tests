@@ -1,3 +1,5 @@
+**Update:** Thanks to the support of several people, the issue was tracked down to rpgp, and solved there with version 0.17: https://github.com/rpgp/rpgp/issues/643
+
 # OpenPGP Tests
 
 This repo serves to illustrate a bug, either in [SequoiaPGP](https://crates.io/crates/sequoia-sq), [rpgp](https://crates.io/crates/pgp), or in the scripts I created here. For lack of a better place, it is currently tracked in [openpgp-interoperability-test-suite#166](https://gitlab.com/sequoia-pgp/openpgp-interoperability-test-suite/-/issues/166).
